@@ -11,6 +11,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Class: FeatureVector.
@@ -21,11 +24,23 @@ import java.io.IOException;
  */
 
 public class FeatureVector {
+	
+	public static HashMap<String, Integer> pos = new HashMap<String, Integer>();
 
 	public static void main(String[] args) {
 		if (args.length == 0)
 			args = new String[] { "/Users/hjp/Workshop/Model/perceptron/trial/" };
 		listFile(args[0]);
+	
+		//Map map = new HashMap();
+		Iterator iter = pos.entrySet().iterator();
+		while(iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			System.out.println(entry.getKey());
+		}
+		for(int i = 0; i < pos.size(); i++) {
+			System.out.println("The type of pos: " + pos.size() );
+		}
 	}
 
 	public static void listFile(String dirName) {
@@ -79,7 +94,12 @@ public class FeatureVector {
 			System.out.println(terms[i]);
 			String[] tokens = terms[i].split(" ");
 			for (int j = 0; j < tokens.length; j++) {
-				System.out.println(tokens[j]);
+				if(j == 1) {
+					System.out.println("POS: " + tokens[j]);
+					if(!pos.containsKey(tokens[j])) {
+						pos.put(tokens[j], 1);
+					}
+				}
 			}
 		}
 
