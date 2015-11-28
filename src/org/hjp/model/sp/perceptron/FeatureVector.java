@@ -43,11 +43,11 @@ public class FeatureVector {
 			if ((Integer) entry.getValue() > 5)
 				System.out.println(entry.getKey() + ": " + entry.getValue());
 		}
-		
+
 		Map.Entry[] set = sortHashtableByValue(featureSet);
-		for(int i = 0; i < set.length; i++){
+		for (int i = 0; i < set.length; i++) {
 			System.out.println(set[i].getKey() + "\t" + set[i].getValue());
-		
+
 		}
 
 		System.out.println("The type of pos: " + featureSet.size());
@@ -324,23 +324,20 @@ public class FeatureVector {
 			featureSet.put(feature, value + 1);
 		}
 	}
-	
+
 	public static Map.Entry[] sortHashtableByValue(Hashtable ht) {
-		 Set set = ht.entrySet();
-		    Map.Entry[] entries = (Map.Entry[]) set.toArray(new Map.Entry[set
-		        .size()]);
+		Set set = ht.entrySet();
+		Map.Entry[] entries = (Map.Entry[]) set.toArray(new Map.Entry[set.size()]);
 
-		    Arrays.sort(entries, new Comparator() {
-		      public int compare(Object arg0, Object arg1) {
-		        int key1 = Integer.parseInt(((Map.Entry) arg0).getValue()
-		            .toString());
-		        int key2 = Integer.parseInt(((Map.Entry) arg1).getValue()
-		            .toString());
-		        return ((Comparable) key1).compareTo(key2);
-		      }
-		    });
+		Arrays.sort(entries, new Comparator() {
+			public int compare(Object arg0, Object arg1) {
+				int key1 = Integer.parseInt(((Map.Entry) arg0).getValue().toString());
+				int key2 = Integer.parseInt(((Map.Entry) arg1).getValue().toString());
+				return ((Comparable) key1).compareTo(key2);
+			}
+		});
 
-		    return entries;
+		return entries;
 	}
 
 }
