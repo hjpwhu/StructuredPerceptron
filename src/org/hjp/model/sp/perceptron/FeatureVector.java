@@ -13,7 +13,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -30,11 +29,14 @@ import java.util.Set;
 public class FeatureVector {
 
 	public static Hashtable<String, Integer> featureSet = new Hashtable<String, Integer>();
+	public static int sentNum = 0;
 
-	public static void main(String[] args) {
-		if (args.length == 0)
-			args = new String[] { "/Users/hjp/Workshop/Model/perceptron/train/" };
-		listFile(args[0]);
+	public static void maintest(String args) {
+		//if (args.length == 0)
+		//	args = new String[] { "/Users/hjp/Workshop/Model/perceptron/train/" };
+		
+		long start = System.currentTimeMillis();
+		listFile(args);
 
 		/// Map map = new HashMap();
 		Iterator iter = featureSet.entrySet().iterator();
@@ -51,6 +53,8 @@ public class FeatureVector {
 		}
 
 		System.out.println("The type of pos: " + featureSet.size());
+		long end = System.currentTimeMillis();
+		System.out.println("The time cost is: " + (end - start) / 1000 + " s!");
 
 	}
 
@@ -90,6 +94,7 @@ public class FeatureVector {
 					} else {
 						extractFeature(sent);
 						sent = "";
+						sentNum++;
 					}
 				}
 			} catch (Exception e) {
@@ -112,13 +117,6 @@ public class FeatureVector {
 				words[i] = tokens[0];
 				postag[i] = tokens[1];
 				tagger[i] = tokens[2];
-				if (!featureSet.containsKey(tokens[j] + "#" + tokens[2])) {
-					featureSet.put(tokens[j] + "#" + tokens[2], 1);
-				}
-				if (featureSet.containsKey(tokens[j] + "#" + tokens[2])) {
-					int value = featureSet.get(tokens[j] + "#" + tokens[2]);
-					featureSet.put(tokens[j] + "#" + tokens[2], value + 1);
-				}
 			}
 
 		}
